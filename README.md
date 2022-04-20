@@ -11,7 +11,7 @@ The ACF of an image I is computed in the Fourier domain as: \
 
 with *FFT()* and *IFFT()* being the discrete Fourier and discrete inverse Fourier transforms of the image I, respectively [[1]](http://dx.doi.org/10.1016/j.actbio.2013.05.015) [[2]](https://doi.org/10.1117/12.596133) [[3]](https://doi.org/10.1016/j.bone.2009.07.001).
 After this step, the ACF is segmented and an ellipsoid is fitted to its contour. The fabric tensor is obtained from the eigenvalues and eigenvectors of this ellipsoid. \
-For a detailed explanation of the method see the notebook [pyfabric_demo](../CT2FE/pyfabric_demo.ipynb)
+For a detailed explanation of the method see the notebook [pyfabric_demo](notebooks/pyfabric_demo.ipynb)
 
 ___
 
