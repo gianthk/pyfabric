@@ -1,7 +1,7 @@
 import numpy as np
 
-from ciclope.recon_utils import read_tiff_stack
-from pyfabric import pyfabric as pf
+from recon_utils import read_tiff_stack
+import pyfabric as pf
 import meshio
 
 input_file = '/home/gianthk/Data/2019.001.coop_TUberlin_simulierte_Mensch.iorig/2000L_crop_imgaussfilt_101micron_uint8/2000L_crop_imgaussfilt_101micron_uint8_0000.tif'

@@ -9,30 +9,21 @@ For more information, call this script with the help option:
 
 __author__ = ['Gianluca Iori']
 __date_created__ = '2021-10-22'
-__date__ = '2022-04-19'
+__date__ = '2022-04-21'
 __copyright__ = 'Copyright (c) 2021, JC|MSK'
 __docformat__ = 'restructuredtext en'
 __license__ = "GPL"
-__version__ = "1.2"
+__version__ = "1.3"
 __maintainer__ = 'Gianluca Iori'
 __email__ = "gianthk.iori@gmail.com"
 
-# import os
-# import argparse
-# import logging
-# import textwrap
 import numpy as np
 import numexpr as ne
-# from pyfabric import ellipsoid_fit as ef
 import ellipsoid_fit as ef
 from tqdm import tqdm
-# import meshio
-import mcubes
 from scipy import ndimage
-# from skimage.filters import threshold_otsu, gaussian
-# from skimage import measure, morphology
 import matplotlib.pyplot as plt
-# from datetime import datetime
+import importlib
 
 #################################################################################
 
@@ -101,7 +92,7 @@ def envelope(bw, method='marching_cubes'):
     bw : ndarray
         Binary image.
     method : str
-        'pymcubes': PyMCubes module.
+        'pymcubes': Requires PyMCubes module.
         'marching_cubes': scikit-image's marching cube algorithm.
 
     Returns
@@ -110,7 +101,18 @@ def envelope(bw, method='marching_cubes'):
         Coordinates [X, Y, Z] of the ACF envelope.
     """
 
+    # if importlib.util.find_spec("mcubes") is not None:
+    #     import mcubes
+    # else:
+    #
+
+    if method == 'pymcubes' and importlib.util.find_spec("mcubes") is None:
+        import warnings
+        warnings.warn("mcubes module not found. Switching to skimage method marching_cubes")
+        method = 'marching_cubes'
+
     if method == 'pymcubes':
+        import mcubes
         # (the 0-levelset of the output of mcubes.smooth is the smoothed version of the 0.5-levelset of the binary array.
         smoothed_L = mcubes.smooth(bw)
         # Extract the 0-levelset
@@ -380,7 +382,7 @@ def fabric_pointset(I, pointset, ROIsize, ACF_threshold=0.5, ROIzoom=False, zoom
     return evecs, radii, evals, fabric_comp, DA
     # return evecs, np.flipud(radii), np.flipud(evals), fabric_comp, DA
 
-def fabric(I, ACF_threshold=0.5, zoom=False, zoom_size=None, zoom_factor=None):
+def fabric(I, ACF_threshold=0.5, zoom=False, zoom_size=None, zoom_factor=None, ACFplot=None):
     """Compute fabric tensor of a given image.
 
     Parameters
@@ -395,6 +397,8 @@ def fabric(I, ACF_threshold=0.5, zoom=False, zoom_size=None, zoom_factor=None):
         Size of the zoomed center.
     zoom_factor
         Zoom factor for imresize.
+    ACFplot
+        PLot of ACF.
 
     Returns
     -------
@@ -416,6 +420,12 @@ def fabric(I, ACF_threshold=0.5, zoom=False, zoom_size=None, zoom_factor=None):
     if zoom:
         # zoom ACF center
         ACF_I = zoom_center(ACF_I, size=zoom_size, zoom_factor=zoom_factor) # check if size of the zoom can be reduced
+
+    if ACFplot:
+        fig, (ax1, ax2, ax3) = plt.subplots(1, 3)
+        ax1.imshow(ACF_I[int(ACF_I.shape[0] / 2), :, :])
+        ax2.imshow(ACF_I[:, int(ACF_I.shape[1] / 2), :])
+        ax3.imshow(ACF_I[:, :, int(ACF_I.shape[2] / 2)])
 
     # envelope of normalized ACF center
     env_points = envelope(to01andbinary(ACF_I, ACF_threshold))

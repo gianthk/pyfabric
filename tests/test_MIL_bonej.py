@@ -1,10 +1,11 @@
-import numpy as np
 import math
 import pyfabric
+# import sys
+# sys.path.append('/home/gianthk/PycharmProjects/recon_utils')
 import recon_utils as ru
+import numpy as np
 from numpy import linalg
 
-import matplotlib
 import matplotlib.pyplot as plt
 import ellipsoid_fit as ef
 
@@ -17,7 +18,7 @@ I = ru.read_tiff_stack('/home/gianthk/Data/2019.001.coop_TUberlin_simulierte_Men
 
 # fabric of one image
 # evecs, radii, evals, fabric_comp, DA = pyfabric.fabric(I[507 - 25:507 + 25, 542 - 25:542 + 25, 545 - 25:545 + 25])
-evecs, radii, evals, fabric_comp, DA = pyfabric.fabric(I)
+evecs, radii, evals, fabric_comp, DA = pyfabric.fabric(I, zoom=True, zoom_factor=3, ACFplot=True)
 
 print(evecs)
 # [[ 0.2835969  -0.94720833 -0.14956327]
