@@ -3,7 +3,9 @@
 - [ ] package repo
 - [ ] test fabric tensor orientation with known ellipsoid
   - [ ] validation with BoneJ MIL method
-  - [ ] install jupyterLab; visualize ellipsoid with [matplotlib widget](https://github.com/matplotlib/ipympl)
+    - [ ] install jupyterLab; visualize ellipsoid with [matplotlib widget](https://github.com/matplotlib/ipympl)
+    - [ ] run `batch_bonej_anisotropy.ijm` ImageJ macro from `/home/gianthk/Applications/Fiji.app/macros`
+    - [ ] test on higher number of cubes
 - [X] check transpose in `pyfabric.envelope`  
 - [X] fit ellipsoid to ACF
 - [X] fabric_pointset
