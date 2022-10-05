@@ -3,6 +3,7 @@
 - [ ] package repo
 - [ ] test fabric tensor orientation with known ellipsoid
   - [ ] validation with BoneJ MIL method
+  - [ ] install jupyterLab; visualize ellipsoid with [matplotlib widget](https://github.com/matplotlib/ipympl)
 - [X] check transpose in `pyfabric.envelope`  
 - [X] fit ellipsoid to ACF
 - [X] fabric_pointset
