@@ -1,11 +1,12 @@
 ## to do:
 - [X] move to separate repo
 - [ ] package repo
-- [ ] test fabric tensor orientation with known ellipsoid
-  - [ ] validation with BoneJ MIL method
-    - [ ] install jupyterLab; visualize ellipsoid with [matplotlib widget](https://github.com/matplotlib/ipympl)
+- [X] test fabric tensor orientation with known ellipsoid
+  - [X] visual inspection VS BoneJ MIL method
+    - [X] install jupyterLab; visualize ellipsoid with [matplotlib widget](https://github.com/matplotlib/ipympl)
+- [ ] test on larger number of volumes
     - [ ] run `batch_bonej_anisotropy.ijm` ImageJ macro from `/home/gianthk/Applications/Fiji.app/macros`
-    - [ ] test on higher number of cubes
+
 - [X] check transpose in `pyfabric.envelope`  
 - [X] fit ellipsoid to ACF
 - [X] fabric_pointset
