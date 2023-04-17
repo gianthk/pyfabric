@@ -7,6 +7,7 @@
 - [ ] multires test (QCT vs HR-pQCT)
   - [X] get cement markers positions
   - [X] align QCT dataset to HR-pQCT
+  - [X] whole bone and trab bone masks
   - [ ] trabecular bone mesh; find coors for ACF worm
   - [ ] get local ACF data of HR-pQCT
   - [ ] get local ACF data of QCT
