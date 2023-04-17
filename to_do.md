@@ -4,8 +4,15 @@
 - [X] test fabric tensor orientation with known ellipsoid
   - [X] visual inspection VS BoneJ MIL method
     - [X] install jupyterLab; visualize ellipsoid with [matplotlib widget](https://github.com/matplotlib/ipympl)
-- [ ] test on larger number of volumes
+- [ ] multires test (QCT vs HR-pQCT)
+  - [X] get cement markers positions
+  - [X] align QCT dataset to HR-pQCT
+  - [ ] trabecular bone mesh; find coors for ACF worm
+  - [ ] get local ACF data of HR-pQCT
+  - [ ] get local ACF data of QCT
+- [ ] test ACF vs BoneJ on larger number of volumes
     - [ ] run `batch_bonej_anisotropy.ijm` ImageJ macro from `/home/gianthk/Applications/Fiji.app/macros`
+- [ ] test [structure tensor](https://github.com/Skielex/structure-tensor)
 
 - [X] check transpose in `pyfabric.envelope`  
 - [X] fit ellipsoid to ACF
