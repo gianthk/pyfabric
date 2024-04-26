@@ -9,11 +9,11 @@ For more information, call this script with the help option:
 
 __author__ = ['Gianluca Iori']
 __date_created__ = '2021-10-22'
-__date__ = '2022-04-21'
-__copyright__ = 'Copyright (c) 2021, JC|MSK'
+__date__ = '2024-04-27'
+__copyright__ = 'Copyright (c) 2024, ORMIR'
 __docformat__ = 'restructuredtext en'
 __license__ = "GPL"
-__version__ = "1.3"
+__version__ = "1.4"
 __maintainer__ = 'Gianluca Iori'
 __email__ = "gianthk.iori@gmail.com"
 
