@@ -29,25 +29,25 @@ mesh_trab.remove_lower_dimensional_cells()
 print(mesh_trab)
 
 # write output mesh
-output_QCT_R_HR_mesh_trab = ('/home/gianthk/Data/TacoSound/QCT/QCTFEMUR_1955L_new/QCTFEMUR_1955L/masks/QCTFEMUR_1955L_R_HR_trab_mesh_max_facet3mm_max_cell_circ9mm_noOrigin.vtk')
+output_QCT_R_HR_mesh_trab = ('/home/gianthk/Data/TacoSound/QCT/QCTFEMUR_1955L_new/QCTFEMUR_1955L/masks/QCTFEMUR_1955L_R_HR_trab_mesh_noOrigin.vtk')
 mesh_trab.write(output_QCT_R_HR_mesh_trab)
 
 # cells barycenter coordinates
 cells_bary = np.sum(mesh_trab.points[mesh_trab.cells[0][1][:]], 1)/mesh_trab.points[mesh_trab.cells[0][1][:]].shape[1] # x, y, z
 
 # save mesh barycenters
-output_trab_cells_bary = ('/home/gianthk/Data/TacoSound/QCT/QCTFEMUR_1955L_new/QCTFEMUR_1955L/masks/QCTFEMUR_1955L_R_HR_trab_mesh_max_facet3mm_max_cell_circ9mm_barycenters_noOrigin.npy')
+output_trab_cells_bary = ('/home/gianthk/Data/TacoSound/QCT/QCTFEMUR_1955L_new/QCTFEMUR_1955L/masks/QCTFEMUR_1955L_R_HR_trab_mesh_barycenters_noOrigin.npy')
 np.save(output_trab_cells_bary, cells_bary)
 
 # add origin
 mesh_trab.points = np.array(data_3D_BW_trab.GetOrigin()) + mesh_trab.points
 
-output_QCT_R_HR_mesh_trab = ('/home/gianthk/Data/TacoSound/QCT/QCTFEMUR_1955L_new/QCTFEMUR_1955L/masks/QCTFEMUR_1955L_R_HR_trab_mesh_max_facet3mm_max_cell_circ9mm.vtk')
+output_QCT_R_HR_mesh_trab = ('/home/gianthk/Data/TacoSound/QCT/QCTFEMUR_1955L_new/QCTFEMUR_1955L/masks/QCTFEMUR_1955L_R_HR_trab_mesh.vtk')
 mesh_trab.write(output_QCT_R_HR_mesh_trab)
 
 # cells barycenter coordinates
 cells_bary = np.sum(mesh_trab.points[mesh_trab.cells[0][1][:]], 1)/mesh_trab.points[mesh_trab.cells[0][1][:]].shape[1] # x, y, z
 
 # save mesh barycenters
-output_trab_cells_bary = ('/home/gianthk/Data/TacoSound/QCT/QCTFEMUR_1955L_new/QCTFEMUR_1955L/masks/QCTFEMUR_1955L_R_HR_trab_mesh_max_facet3mm_max_cell_circ9mm_barycenters.npy')
+output_trab_cells_bary = ('/home/gianthk/Data/TacoSound/QCT/QCTFEMUR_1955L_new/QCTFEMUR_1955L/masks/QCTFEMUR_1955L_R_HR_trab_mesh_barycenters.npy')
 np.save(output_trab_cells_bary, cells_bary)
