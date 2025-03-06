@@ -37,7 +37,8 @@ def readheader(filename, leaveopen=False):
         fid = open(filename, 'rb')
         
         # Read header
-        check = fid.read(4)  # char check[16]
+        check = fid.read(4).decode('utf-8')  # char check[16]
+        print(check)
         headerinfo['data_type_id'] = struct.unpack('I', fid.read(4))[0]  # int data_type
         headerinfo['type'] = 'int16'  # standard for ISQ
         headerinfo['nr_of_bytes'] = struct.unpack('I', fid.read(4))[0]  # int nr_of_bytes
@@ -65,6 +66,7 @@ def readheader(filename, leaveopen=False):
         headerinfo['site'] = struct.unpack('i', fid.read(4))[0]
         headerinfo['reference_line_um'] = struct.unpack('i', fid.read(4))[0]
         headerinfo['recon_alg'] = struct.unpack('i', fid.read(4))[0]
+        print(headerinfo)
         headerinfo['samplename'] = fid.read(40).decode('utf-8').strip('\x00')
         headerinfo['energy'] = struct.unpack('I', fid.read(4))[0]
         headerinfo['intensity'] = struct.unpack('I', fid.read(4))[0]
