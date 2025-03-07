@@ -2,8 +2,12 @@ import numpy as np
 import struct
 
 """
-ISQdata methods for Scanco Medical ISQ data input
-Converted from MATLAB to Python
+ISQdata methods for reading Scanco Medical ISQ iamge files.
+Converted from MATLAB to Python.
+Reference MATLAB code:
+- https://ch.mathworks.com/matlabcentral/fileexchange/70572-simplect
+- https://ch.mathworks.com/matlabcentral/fileexchange/62066-readisq
+
 Author: Gianluca Iori
 Maintainer: Gianluca Iori
 Last update: 01/02/2018 (MATLAB)
