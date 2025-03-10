@@ -4,6 +4,9 @@ import SimpleITK as sitk
 
 # import pyfabric
 sys.path.append(os.path.abspath(".."))
+# sys.path.append(os.path.abspath("~/myterminus/code/pyfabric/"))
+sys.path.append(os.path.abspath("/home/giiori/myterminus/code/pyfabric"))
+
 from tests.ISQmethods import ISQload
 
 #filtering and image processing
@@ -16,15 +19,16 @@ scale_factor = (1/2, 1/2, 1/2)
 
 #define files
 STORAGE = "/usr/terminus/data-xrm-01/stamplab/external/tacosound/HR-pQCT_II"
-data_dir = "/usr/terminus/data-xrm-01/stamplab/users/mwahlin/2025/trab_master/CT pipeline/processed_ds_HR_images"
+# data_dir = "/usr/terminus/data-xrm-01/stamplab/users/mwahlin/2025/trab_master/CT pipeline/processed_ds_HR_images"
+data_dir = "/usr/terminus/data-xrm-01/stamplab/external/tacosound/HR-pQCT_II/00_resampled_data"
 
 target_folders = [
     "1955_L",
-    "1956_L",
-    "1996_R",
-    "2005_L",
-    "2007_L",
-    "2019_L"
+    # "1956_L",
+    # "1996_R",
+    # "2005_L",
+    # "2007_L",
+    # "2019_L"
 ]
 
 #TODO create loop
@@ -39,7 +43,7 @@ for subfolder in target_folders:
 
     #TODO change to all slices
     #Load image
-    image_data, ISQheader, filename = ISQload(file_path, x_min=0, y_min=0, z_min=4000, x_size=4608, y_size=4608, z_size=15)
+    image_data, ISQheader, filename = ISQload(file_path, x_min=0, y_min=0, z_min=0, x_size=4608, y_size=4608, z_size=5921)
 
     #Process image
     image_data[:] = gaussian_filter(image_data, sigma=sigma)
@@ -66,8 +70,8 @@ for subfolder in target_folders:
     for key in metadata_keys:
         sitk_image.SetMetaData(key, str(ISQheader[key]))
     # Save the processed image
-    output_filename = os.path.basename(filename).replace(".ISQ", "_processed.mha")
-    output_filename = os.path.join(data_dir, output_filename)
+    output_filename = os.path.basename(filename).replace(".ISQ", "_processed.mhd")
+    output_filename = os.path.join(data_dir, subfolder, output_filename)
     sitk.WriteImage(sitk_image, output_filename)
 
 
