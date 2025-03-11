@@ -1,6 +1,7 @@
 import os
 import sys
 import SimpleITK as sitk
+import time
 
 # import pyfabric
 sys.path.append(os.path.abspath(".."))
@@ -34,6 +35,7 @@ target_folders = [
 #loop over images
 for subfolder in target_folders:
 
+    start_time = time.time()
     folder_path = os.path.join(STORAGE, subfolder)
     isq_files = [f for f in os.listdir(folder_path) if f.lower().endswith(".isq")]
     isq_file = isq_files[0]
@@ -78,4 +80,7 @@ for subfolder in target_folders:
     output_filename = os.path.join(data_dir, subfolder, output_filename)
     sitk.WriteImage(sitk_image, output_filename)
 
+    end_time = time.time()
+    print(f"Processed {subfolder} in {end_time - start_time:.2f} seconds")
+    print(f"Saved as {output_filename}")
 
