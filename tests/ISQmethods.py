@@ -14,11 +14,19 @@ Last update: 01/02/2018 (MATLAB)
 Last update: 07/03/2025 (Python)
 """
 
-def ISQload(filename=None, x_min=1, y_min=1, z_min=1, x_size=None, y_size=None, z_size=None, interactive=True):
+def ISQload(filename=None, x_min=0, y_min=0, z_min=0, x_size=None, y_size=None, z_size=None, interactive=True):
     """
     Load image data from ISQ file.
     """
     header = readheader(filename)
+
+    if x_size is None:
+        x_size = header['x_dim']
+    if y_size is None:  
+        y_size = header['y_dim']
+    if z_size is None:
+        z_size = header['z_dim']
+
     data = readdata(filename, x_min, y_min, z_min, x_size, y_size, z_size)
     return data, header, filename
 
