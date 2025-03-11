@@ -25,7 +25,7 @@ data_dir = "/usr/terminus/data-xrm-01/stamplab/external/tacosound/HR-pQCT_II/00_
 
 target_folders = [
     # "1955_L",
-    "1956_L",
+    # "1956_L",
     "1996_R",
     "2005_L",
     "2007_L",
