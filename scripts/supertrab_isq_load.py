@@ -23,17 +23,15 @@ STORAGE = "/usr/terminus/data-xrm-01/stamplab/external/tacosound/HR-pQCT_II"
 data_dir = "/usr/terminus/data-xrm-01/stamplab/external/tacosound/HR-pQCT_II/00_resampled_data"
 
 target_folders = [
-    "1955_L",
-    # "1956_L",
-    # "1996_R",
-    # "2005_L",
-    # "2007_L",
-    # "2019_L"
+    # "1955_L",
+    "1956_L",
+    "1996_R",
+    "2005_L",
+    "2007_L",
+    "2019_L"
 ]
 
-#TODO create loop
 #loop over images
-
 for subfolder in target_folders:
 
     folder_path = os.path.join(STORAGE, subfolder)
@@ -43,16 +41,22 @@ for subfolder in target_folders:
 
     #TODO change to all slices
     #Load image
-    image_data, ISQheader, filename = ISQload(file_path, x_min=0, y_min=0, z_min=0, x_size=4608, y_size=4608, z_size=5921)
+    # image_data, ISQheader, filename = ISQload(file_path, x_min=0, y_min=0, z_min=0, x_size=4608, y_size=4608, z_size=5921)
+    image_data, ISQheader, filename = ISQload(file_path)
 
     #Process image
     image_data[:] = gaussian_filter(image_data, sigma=sigma)
     np.putmask(image_data, image_data < 1000, 2000)
+
     #create an empty array to store results of downsampling
     new_shape = tuple(round(s * 0.5) for s in image_data.shape)
     downsampled_image = np.empty(new_shape, dtype=np.int16)
+
+    # downsample image
     zoom(image_data, scale_factor, order=1, output=downsampled_image).astype(np.int16)
 
+    # free memory from raw image
+    del image_data
 
     #Save image as .mha
     sitk_image = sitk.GetImageFromArray(downsampled_image)
