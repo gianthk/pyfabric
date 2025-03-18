@@ -24,7 +24,7 @@ from tests.ISQmethods import ISQload
 
 # Define paths
 STORAGE = "/usr/terminus/data-xrm-01/stamplab/external/tacosound/HR-pQCT_II"
-save_path = Path("/usr/terminus/data-xrm-01/stamplab/external/tacosound/HR-pQCT_II/00_resampled_data/supertrab_test.zarr")
+save_path = Path("/usr/terminus/data-xrm-01/stamplab/external/tacosound/HR-pQCT_II/zarr_data/supertrab.zarr")
 
 # Ensure the parent directory exists before using Zarr
 if not save_path.parent.exists():
@@ -57,7 +57,7 @@ for subfolder in target_folders:
     file_path = os.path.join(folder_path, isq_file)
 
     #Load image
-    image_data, ISQheader, filename = ISQload(file_path,z_min=2000, z_size=6)
+    image_data, ISQheader, filename = ISQload(file_path)
     print(image_data.shape)
 
     #Create .zarr group

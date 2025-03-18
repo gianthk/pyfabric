@@ -10,4 +10,4 @@
 #export NUMEXPR_MAX_THREADS=10
 
 ##################################################################################
-python /home/giiori/myterminus/code/pyfabric/scripts/supertrab_isq_load.py
+python /home/giiori/myterminus/code/pyfabric/scripts/supertrab_isq_to_zarr_script.py
