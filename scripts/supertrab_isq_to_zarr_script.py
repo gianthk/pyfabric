@@ -44,7 +44,7 @@ target_folders = [
 ]
 
 # Define chunk size
-chunk_size = (2, 512, 512)
+chunk_size = (1, 512, 512)
 
 # Read the .isq (to a numpy array?)
 for subfolder in target_folders:
