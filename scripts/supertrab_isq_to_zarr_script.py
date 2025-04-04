@@ -20,11 +20,12 @@ def convert_header(header):
 
 # import pyfabric
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + "/.."))
-from tests.ISQmethods import ISQload
+sys.path.append("/home/mwahlin/myterminus/2025/trab_master/CT_pipeline/pyfabric/tests")
+from ISQmethods import ISQload
 
 # Define paths
 STORAGE = "/usr/terminus/data-xrm-01/stamplab/external/tacosound/HR-pQCT_II"
-save_path = Path("/usr/terminus/data-xrm-01/stamplab/external/tacosound/HR-pQCT_II/zarr_data/supertrab.zarr")
+save_path = Path("/usr/terminus/data-xrm-01/stamplab/external/tacosound/HR-pQCT_II/zarr_data/supertrab_small.zarr")
 
 # Ensure the parent directory exists before using Zarr
 if not save_path.parent.exists():
@@ -57,7 +58,7 @@ for subfolder in target_folders:
     file_path = os.path.join(folder_path, isq_file)
 
     #Load image
-    image_data, ISQheader, filename = ISQload(file_path)
+    image_data, ISQheader, filename = ISQload(file_path, z_min=4000, z_size=1)
     print(image_data.shape)
 
     #Create .zarr group
