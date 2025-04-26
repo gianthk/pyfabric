@@ -25,7 +25,7 @@ from ISQmethods import ISQload
 
 # Define paths
 STORAGE = "/usr/terminus/data-xrm-01/stamplab/external/tacosound/HR-pQCT_II"
-save_path = Path("/usr/terminus/data-xrm-01/stamplab/external/tacosound/HR-pQCT_II/zarr_data/supertrab_small.zarr")
+save_path = Path("/usr/terminus/data-xrm-01/stamplab/external/tacosound/HR-pQCT_II/zarr_data/supertrab.zarr")
 
 # Ensure the parent directory exists before using Zarr
 if not save_path.parent.exists():
@@ -45,7 +45,7 @@ target_folders = [
 ]
 
 # Define chunk size
-chunk_size = (1, 512, 512)
+chunk_size = (128, 512, 512)
 
 # Read the .isq (to a numpy array?)
 for subfolder in target_folders:
@@ -58,7 +58,7 @@ for subfolder in target_folders:
     file_path = os.path.join(folder_path, isq_file)
 
     #Load image
-    image_data, ISQheader, filename = ISQload(file_path, z_min=4000, z_size=1)
+    image_data, ISQheader, filename = ISQload(file_path)
     print(image_data.shape)
 
     #Create .zarr group
@@ -66,7 +66,7 @@ for subfolder in target_folders:
 
     #Save data to .zarr
     print(f"Saving image data for {subfolder}")
-    sample_group.create_dataset("image", data=image_data, chunks=chunk_size)
+    sample_group.create_dataset("image", data=image_data, chunks=chunk_size, dtype=np.float32)
 
     # Free memory
     del image_data

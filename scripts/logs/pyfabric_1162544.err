@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/usr/terminus/data-xrm-01/stamplab/users/mwahlin/2025/trab_master/CT_pipeline/pyfabric/scripts/supertrab_isq_load.py", line 50, in <module>
+    image_data[:] = gaussian_filter(image_data, sigma=sigma)
+  File "/usr/terminus/data-xrm-01/stamplab/users/mwahlin/mamba/envs/ML_env/lib/python3.10/site-packages/scipy/ndimage/_filters.py", line 413, in gaussian_filter
+    output = _ni_support._get_output(output, input)
+  File "/usr/terminus/data-xrm-01/stamplab/users/mwahlin/mamba/envs/ML_env/lib/python3.10/site-packages/scipy/ndimage/_ni_support.py", line 83, in _get_output
+    output = np.zeros(shape, dtype=input.dtype.name)
+numpy.core._exceptions._ArrayMemoryError: Unable to allocate 206. GiB for an array with shape (5214, 4608, 4608) and data type int16

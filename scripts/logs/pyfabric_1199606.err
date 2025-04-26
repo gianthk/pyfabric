@@ -1,0 +1,2 @@
+/scratch/slurm/spool/job1199606/slurm_script: line 13: 768338 Killed                  python /usr/terminus/data-xrm-01/stamplab/users/mwahlin/2025/trab_master/CT_pipeline/pyfabric/scripts/supertrab_isq_load.py
+slurmstepd: error: Detected 1 oom_kill event in StepId=1199606.batch. Some of the step tasks have been OOM Killed.

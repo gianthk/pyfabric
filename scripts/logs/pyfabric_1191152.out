@@ -1,0 +1,52 @@
+Reading ISQ data...
+ done!
+(5921, 4608, 4608)
+Saving image data for 1955_L
+1955_L processed in 3155.32 seconds
+Reading ISQ data...
+ done!
+(5214, 4608, 4608)
+Saving image data for 1956_L
+1956_L processed in 2849.51 seconds
+Reading ISQ data...
+ done!
+(5002, 4608, 4608)
+Saving image data for 1996_R
+1996_R processed in 2688.14 seconds
+Reading ISQ data...
+ done!
+(5113, 4608, 4608)
+Saving image data for 2005_L
+2005_L processed in 2639.93 seconds
+Reading ISQ data...
+ done!
+(5136, 4608, 4608)
+Saving image data for 2007_L
+2007_L processed in 2816.68 seconds
+Reading ISQ data...
+ done!
+(5670, 4608, 4608)
+Saving image data for 2019_L
+2019_L processed in 2981.64 seconds
+/
+ ├── 1955_L
+ │   └── image (5921, 4608, 4608) float32
+ ├── 1956_L
+ │   └── image (5214, 4608, 4608) float32
+ ├── 1996_R
+ │   └── image (5002, 4608, 4608) float32
+ ├── 2005_L
+ │   └── image (5113, 4608, 4608) float32
+ ├── 2007_L
+ │   └── image (5136, 4608, 4608) float32
+ └── 2019_L
+     └── image (5670, 4608, 4608) float32
+Name        : /
+Type        : zarr.hierarchy.Group
+Read-only   : False
+Store type  : zarr.storage.DirectoryStore
+No. members : 6
+No. arrays  : 0
+No. groups  : 6
+Groups      : 1955_L, 1956_L, 1996_R, 2005_L, 2007_L, 2019_L
+
