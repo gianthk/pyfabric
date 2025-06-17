@@ -6,9 +6,9 @@ import time
 # import pyfabric
 sys.path.append(os.path.abspath(".."))
 # sys.path.append(os.path.abspath("~/myterminus/code/pyfabric/"))
-sys.path.append(os.path.abspath("/home/giiori/myterminus/code/pyfabric"))
+sys.path.append(os.path.abspath("/home/mwahlin/myterminus/2025/trab_master/CT_pipeline/pyfabric/tests"))
 
-from tests.ISQmethods import ISQload
+from ISQmethods import ISQload
 
 #filtering and image processing
 import numpy as np
@@ -24,12 +24,12 @@ STORAGE = "/usr/terminus/data-xrm-01/stamplab/external/tacosound/HR-pQCT_II"
 data_dir = "/usr/terminus/data-xrm-01/stamplab/external/tacosound/HR-pQCT_II/00_resampled_data"
 
 target_folders = [
-    # "1955_L",
-    # "1956_L",
-    "1996_R",
-    "2005_L",
-    "2007_L",
-    "2019_L"
+    #"1955_L"
+    "1956_L",
+    #"1996_R",
+    #"2005_L",
+    #"2007_L",
+    #"2019_L"
 ]
 
 #loop over images

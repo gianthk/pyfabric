@@ -20,7 +20,8 @@ def convert_header(header):
 
 # import pyfabric
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + "/.."))
-from tests.ISQmethods import ISQload
+sys.path.append("/home/mwahlin/myterminus/2025/trab_master/CT_pipeline/pyfabric/tests")
+from ISQmethods import ISQload
 
 # Define paths
 STORAGE = "/usr/terminus/data-xrm-01/stamplab/external/tacosound/HR-pQCT_II"
@@ -44,7 +45,7 @@ target_folders = [
 ]
 
 # Define chunk size
-chunk_size = (1, 512, 512)
+chunk_size = (128, 512, 512)
 
 # Read the .isq (to a numpy array?)
 for subfolder in target_folders:
@@ -65,7 +66,7 @@ for subfolder in target_folders:
 
     #Save data to .zarr
     print(f"Saving image data for {subfolder}")
-    sample_group.create_dataset("image", data=image_data, chunks=chunk_size)
+    sample_group.create_dataset("image", data=image_data, chunks=chunk_size, dtype=np.float32)
 
     # Free memory
     del image_data
