@@ -1,1 +1,9 @@
 tests/__pycache__/ISQmethods.cpython-310.pyc
+logs/
+resources/__pycache__/
+*.pyc
+.gitignore
+*.DS_Store
+gmon.out
+*.code-workspace
+._recon_utils.py
