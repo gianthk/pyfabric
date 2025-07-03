@@ -7,3 +7,4 @@ resources/__pycache__/
 gmon.out
 *.code-workspace
 ._recon_utils.py
+tests/__pycache__/
