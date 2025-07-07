@@ -11,4 +11,5 @@
 
 ##################################################################################
 # python /home/giiori/myterminus/code/pyfabric/scripts/supertrab_isq_to_zarr_script.py
-python /home/giiori/myterminus/code/pyfabric/scripts/supertrab_mhd_downsample.py
+# python /home/giiori/myterminus/code/pyfabric/scripts/supertrab_mhd_downsample.py
+python /home/giiori/myterminus/code/pyfabric/scripts/supertrab_resample.py
