@@ -11,7 +11,11 @@ import numpy as np
 registred_data_dir = "/usr/terminus/data-xrm-01/stamplab/external/tacosound/QCT/QCTFEMUR_2019L/2019_L_R_HR_elastix_01/2019_L_R_HR_elastix.mhd"
 output_dir = "/usr/terminus/data-xrm-01/stamplab/external/tacosound/QCT/QCTFEMUR_2019L/2019_L_R_HR_elastix_01/2019_L_R_HR_elastix_resampled.mhd"
 
+print("Read image")
+
 data_QCT = sitk.ReadImage(registred_data_dir, imageIO="MetaImageIO")
+
+print("Read image")
 
 size_QCT = data_QCT.GetSize()
 print("Image size:", size_QCT[0], size_QCT[1], size_QCT[2])

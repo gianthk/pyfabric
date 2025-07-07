@@ -9,7 +9,11 @@
 # Variables section: 
 #export NUMEXPR_MAX_THREADS=10
 
+export PYTHONUNBUFFERED=1
+
 ##################################################################################
 # python /home/giiori/myterminus/code/pyfabric/scripts/supertrab_isq_to_zarr_script.py
 # python /home/giiori/myterminus/code/pyfabric/scripts/supertrab_mhd_downsample.py
-python /home/giiori/myterminus/code/pyfabric/scripts/supertrab_resample.py
+# python /home/giiori/myterminus/code/pyfabric/scripts/supertrab_resample.py
+
+python /home/mwahlin/myterminus/2025/trab_master/CT_pipeline/pyfabric/scripts/supertrab_resample.py
