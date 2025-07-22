@@ -25,7 +25,7 @@
 
 // Total number of resolutions
 (NumberOfResolutions 5)
-//(ImagePyramidSchedule 16 16 8 8 8 4 4 4 2 2 2 1 1 1 1)
+(ImagePyramidSchedule 16 16 8 8 8 4 4 4 2 2 2 1 1 1 1)
 
 
 // ********** Transform
@@ -38,7 +38,7 @@
 // ********** Optimizer
 
 // Maximum number of iterations in each resolution level:
-(MaximumNumberOfIterations 2000)
+(MaximumNumberOfIterations 4000)
 
 (AutomaticParameterEstimation "true")
 (UseAdaptiveStepSizes "true")

@@ -8,13 +8,13 @@ import SimpleITK as sitk
 from skimage.filters import threshold_multiotsu
 from skimage import morphology
 
-from imaging_utils import periosteummask
-# import pyfabric
-from resources.pyfabric_image_utils import markers_coors, resample_img, align_with_vectors, affine_trans
-
 sys.path.append('/usr/terminus/data-xrm-01/stamplab/users/giiori/code/pyfabric')
 sys.path.append('/usr/terminus/data-xrm-01/stamplab/users/giiori/code/ORMIR_XCT')
 sys.path.append('/usr/terminus/data-xrm-01/stamplab/users/giiori/code/recon_utils')
+
+from imaging_utils import periosteummask
+# import pyfabric
+from resources.pyfabric_image_utils import markers_coors, resample_img, align_with_vectors, affine_trans
 
 data_dir = "/usr/terminus/data-xrm-01/stamplab/external/tacosound/"
 work_dir = '/usr/terminus/data-xrm-01/stamplab/users/giiori/2025/2025-06_supertrab_registration/'
@@ -24,15 +24,15 @@ elastix_parameter_file = '/home/giiori/myterminus/code/pyfabric/elastix/Paramete
 target_folders = [
     "1955_L",
     "1956_L",
-    # "1996_R",
+    "1996_R",
     "2005_L",
     "2007_L",
-    # "2019_L"
+    "2019_L"
 ]
 
 long_QCT_names = [
-    "1958_L", "1977_L", "1985_L", "1994_L", "1996_L", "2000_L",
-    "2001_L", "2004_L", "2010_L", "2014_L", "2017_L", "2019_L"
+    "1955_L", "1956_L", "1958_L", "1977_L", "1985_L", "1994_L", "1996_L", "2000_L",
+    "2001_L", "2004_L", "2005_L", "2007_L", "2010_L", "2014_L", "2017_L", "2019_L"
 ]
 
 isqnames = [
@@ -53,7 +53,7 @@ for specimen_id, specimen in enumerate(target_folders):
     input_file_HR_res = os.path.join(data_dir, 'HR-pQCT_II/00_resampled_data', specimen, (isqname + '_processed.mhd'))
 
     if specimen in long_QCT_names:
-        input_dir_QCT_DCM = os.path.join(data_dir, 'QCT/', ('QCTFEMUR_' + specimen.replace("_", "")), 'Q_CT_DIAGBILANZ_HR_0003') # load the original DICOM files (contain misalignmed slices)
+        # input_dir_QCT_DCM = os.path.join(data_dir, 'QCT/', ('QCTFEMUR_' + specimen.replace("_", "")), 'Q_CT_DIAGBILANZ_HR_0003') # load the original DICOM files (contain misalignmed slices)
         input_file_QCT_fixed = os.path.join(data_dir, 'QCT', ('QCTFEMUR_' + specimen.replace("_", "")), (specimen + '_3Dslicer.mhd'))
         output_QCT_R_HR = os.path.join(data_dir, 'QCT', ('QCTFEMUR_' + specimen.replace("_", "")), (specimen + '_R_HR.mhd'))
         output_QCT_R_HR_mask = os.path.join(data_dir, 'QCT', ('QCTFEMUR_' + specimen.replace("_", "")), (specimen + '_R_HR_mask.mhd'))
@@ -61,7 +61,7 @@ for specimen_id, specimen in enumerate(target_folders):
         elastix_output_dir = os.path.join(data_dir, 'QCT', ('QCTFEMUR_' + specimen.replace("_", "")), ('QCTFEMUR_' + specimen.replace("_", "") + '_elastix'))
     
     else:
-        input_dir_QCT_DCM = os.path.join(data_dir, 'QCT/', ('QCT' + specimen.replace("_", "")), 'Q_CT_DIAGBILANZ_HR_0003')
+        # input_dir_QCT_DCM = os.path.join(data_dir, 'QCT/', ('QCT' + specimen.replace("_", "")), 'Q_CT_DIAGBILANZ_HR_0003')
         input_file_QCT_fixed = os.path.join(data_dir, 'QCT', ('QCT' + specimen.replace("_", "")), (specimen + '_3Dslicer.mhd'))
         output_QCT_R_HR = os.path.join(data_dir, 'QCT', ('QCT' + specimen.replace("_", "")), (specimen + '_R_HR.mhd'))
         output_QCT_R_HR_mask = os.path.join(data_dir, 'QCT', ('QCT' + specimen.replace("_", "")), (specimen + '_R_HR_mask.mhd'))
@@ -82,10 +82,10 @@ for specimen_id, specimen in enumerate(target_folders):
     ])
 
     # Read and inspect QCT input data
-    reader = sitk.ImageSeriesReader()
-    dicom_names = reader.GetGDCMSeriesFileNames(input_dir_QCT_DCM)
-    reader.SetFileNames(dicom_names)
-    data_3D_QCT = reader.Execute()
+    # reader = sitk.ImageSeriesReader()
+    # dicom_names = reader.GetGDCMSeriesFileNames(input_dir_QCT_DCM)
+    # reader.SetFileNames(dicom_names)
+    # data_3D_QCT = reader.Execute()
 
     data_3D_QCT = sitk.ReadImage(input_file_QCT_fixed, imageIO="MetaImageIO")
     size_QCT = data_3D_QCT.GetSize()
@@ -139,6 +139,10 @@ for specimen_id, specimen in enumerate(target_folders):
     writer.Execute(data_3D_QCT_trans)
 
     # Create mask for QCT transformed image
+    filter = sitk.MedianImageFilter()
+    filter.SetRadius(1)
+    data_3D_QCT_med = filter.Execute(data_3D_QCT_trans)
+
     data_3D_QCT_BW_peri = periosteummask(sitk.GetArrayFromImage(data_3D_QCT_med)>(ts[1]-400),
                                          closepixels=5,
                                          closevoxels=5,
@@ -161,8 +165,8 @@ for specimen_id, specimen in enumerate(target_folders):
     closing_filter.Execute(data_3D_QCT_BW_peri)
 
     dilate_filter = sitk.BinaryDilateImageFilter()
-    dilate_filter.SetKernelRadius(10)
-    dilate_filter.Execute(data_3D_QCT_BW_peri)
+    dilate_filter.SetKernelRadius(20)
+    data_3D_QCT_BW_peri = dilate_filter.Execute(data_3D_QCT_BW_peri)
 
     # Write mask for QCT transformed image
     writer.SetFileName(output_QCT_R_HR_mask)
@@ -177,9 +181,12 @@ for specimen_id, specimen in enumerate(target_folders):
     writer.Execute(data_3D_res)
 
     # launch elastix 3D affine registration command
+    # elastix_command = (f"/home/giiori/myterminus/software/elastix5.1/bin/elastix -f {output_file_HR_res} -m {output_QCT_R_HR} -fMask {output_QCT_R_HR_mask} -out {elastix_output_dir} -p {elastix_parameter_file} ")
+    
     elastix_command = (
         "export LD_LIBRARY_PATH=/home/giiori/myterminus/software/elastix5.1/lib:$LD_LIBRARY_PATH && "
-        f"elastix -f {output_file_HR_res} -m {output_QCT_R_HR} -fMask {output_QCT_R_HR_mask} -out {elastix_output_dir} -p {elastix_parameter_file} "
+        f"/home/giiori/myterminus/software/elastix5.1/bin/elastix -f {output_file_HR_res} -m {output_QCT_R_HR} -fMask {output_QCT_R_HR_mask} -out {elastix_output_dir} -p {elastix_parameter_file} "
         )
     
     os.system(elastix_command)
+    print(elastix_command)
