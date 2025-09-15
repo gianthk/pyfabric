@@ -18,7 +18,7 @@
 (ResampleInterpolator "FinalBSplineInterpolator")
 (Resampler "DefaultResampler")
 //(Resampler "CUDAResampler")
-(Transform "AffineTransform")
+(Transform "BSplineTransform")
 
 
 // ********** Pyramid
