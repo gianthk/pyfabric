@@ -5,8 +5,8 @@ import time
 
 # import pyfabric
 sys.path.append(os.path.abspath(".."))
-# sys.path.append(os.path.abspath("~/myterminus/code/pyfabric/"))
-sys.path.append(os.path.abspath("/home/mwahlin/myterminus/2025/trab_master/CT_pipeline/pyfabric/tests"))
+sys.path.append(os.path.abspath("~/myterminus/code/pyfabric/"))
+# sys.path.append(os.path.abspath("/home/mwahlin/myterminus/2025/trab_master/CT_pipeline/pyfabric/tests"))
 
 from ISQmethods import ISQload
 
@@ -25,8 +25,9 @@ data_dir = "/usr/terminus/data-xrm-01/stamplab/external/tacosound/HR-pQCT_II/00_
 
 target_folders = [
     #"1955_L"
-    "1956_L",
+    # "1956_L",
     #"1996_R",
+    '2000_R',
     #"2005_L",
     #"2007_L",
     #"2019_L"
