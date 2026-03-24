@@ -19,6 +19,7 @@ def ISQload(filename=None, x_min=0, y_min=0, z_min=0, x_size=None, y_size=None, 
     Load image data from ISQ file.
     """
     header = readheader(filename)
+    print(header)
 
     if x_size is None:
         x_size = header['x_dim']
@@ -98,6 +99,7 @@ def readdata(filename, x_min, y_min, z_min, x_size, y_size, z_size):
 
         print('Reading ISQ data...')
         for kk in range(z_size):
+            print(f'\r Reading slice {kk + 1} of {z_size}', end='')
             fid.seek(headerinfo['x_dim'] * (y_min) * 2, 1)
             for jj in range(y_size):
                 fid.seek((x_min) * 2, 1)

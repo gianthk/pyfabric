@@ -16,7 +16,11 @@ from scipy.ndimage import gaussian_filter, zoom
 
 #constants
 sigma = 1.3
-scale_factor = (1/2, 1/2, 1/2)
+
+
+# scale_factor = 1/2
+scale_factor = 1/10
+scale_factor_array = (scale_factor, scale_factor, scale_factor)
 
 #define files
 STORAGE = "/usr/terminus/data-xrm-01/stamplab/external/tacosound/HR-pQCT_II"
@@ -27,10 +31,12 @@ target_folders = [
     #"1955_L"
     # "1956_L",
     #"1996_R",
-    '2000_R',
+    #'2000_R',
     #"2005_L",
     #"2007_L",
-    #"2019_L"
+    #"2019_L",
+    "2000_R",
+    '2001_R',
 ]
 
 #loop over images
@@ -44,19 +50,19 @@ for subfolder in target_folders:
 
     #TODO change to all slices
     #Load image
-    # image_data, ISQheader, filename = ISQload(file_path, x_min=0, y_min=0, z_min=0, x_size=4608, y_size=4608, z_size=5921)
-    image_data, ISQheader, filename = ISQload(file_path)
+    image_data, ISQheader, filename = ISQload(file_path, x_min=0, y_min=0, z_min=0, x_size=4608, y_size=4608, z_size=5105)
+    # image_data, ISQheader, filename = ISQload(file_path)
 
     #Process image
     image_data[:] = gaussian_filter(image_data, sigma=sigma)
     np.putmask(image_data, image_data < 1000, 2000)
 
     #create an empty array to store results of downsampling
-    new_shape = tuple(round(s * 0.5) for s in image_data.shape)
+    new_shape = tuple(round(s * scale_factor) for s in image_data.shape)
     downsampled_image = np.empty(new_shape, dtype=np.int16)
 
     # downsample image
-    zoom(image_data, scale_factor, order=1, output=downsampled_image).astype(np.int16)
+    zoom(image_data, scale_factor_array, order=1, output=downsampled_image).astype(np.int16)
 
     # free memory from raw image
     del image_data
@@ -67,8 +73,8 @@ for subfolder in target_folders:
     original_spacing = np.array([ISQheader["x_dim_um"] / ISQheader["x_dim"],
         ISQheader["y_dim_um"] / ISQheader["y_dim"],
         ISQheader["slice_thickness_um"]])
-    # Adjust spacing due to downsampling (factor 2)
-    new_spacing = original_spacing * 2  
+    # Adjust spacing due to downsampling factor
+    new_spacing = original_spacing * (1/scale_factor)
     sitk_image.SetSpacing(new_spacing.tolist())  # Convert to list for ITK compatibility
     # Set Origin (Z position from ISQheader)
     sitk_image.SetOrigin([0, 0, ISQheader["slice_1_pos_um"]])

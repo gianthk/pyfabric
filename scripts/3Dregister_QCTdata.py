@@ -7,6 +7,7 @@ import pandas as pd
 import SimpleITK as sitk
 from skimage.filters import threshold_multiotsu
 from skimage import morphology
+from scipy.ndimage import binary_fill_holes
 
 sys.path.append('/usr/terminus/data-xrm-01/stamplab/users/giiori/code/pyfabric')
 sys.path.append('/usr/terminus/data-xrm-01/stamplab/users/giiori/code/ORMIR_XCT')
@@ -19,29 +20,35 @@ from resources.pyfabric_image_utils import markers_coors, resample_img, align_wi
 data_dir = "/usr/terminus/data-xrm-01/stamplab/external/tacosound/"
 work_dir = '/usr/terminus/data-xrm-01/stamplab/users/giiori/2025/2025-06_supertrab_registration/'
 
-elastix_parameter_file = '/home/giiori/myterminus/code/pyfabric/elastix/Parameters.Par0015.expC.phantom.NC.affine2.txt'
+# elastix_parameter_file = '/home/giiori/myterminus/code/pyfabric/elastix/Parameters.Par0015.expC.phantom.NC.affine.txt'
+elastix_parameter_file = '/home/giiori/myterminus/code/pyfabric/elastix/Parameters.Par0015.expC.phantom.NC.BSpline.txt'
 
 target_folders = [
-    "1955_L",
-    "1956_L",
-    "1996_R",
-    "2005_L",
-    "2007_L",
-    "2019_L"
+    # "1955_L",
+    # "1956_L",
+    # "1996_R",
+    # "2005_L",
+    # "2007_L",
+    "2019_L",
+    # "2000_R",
+    # "2001_R",
 ]
 
 isqnames = [
-    "C0001577",
-    "C0001464",
-    "C0001808",
-    "C0001015",
-    "C0001429",
-    "C0001524"
+    # "C0001577",
+    # "C0001464",
+    # "C0001808",
+    # "C0001015",
+    # "C0001429",
+    "C0001524",
+    # "C0002013",
+    # "C0001863",
 ]
 
 long_QCT_names = [
     "1955_L", "1956_L", "1958_L", "1977_L", "1985_L", "1994_L", "1996_L", "2000_L",
-    "2001_L", "2004_L", "2005_L", "2007_L", "2010_L", "2014_L", "2017_L", "2019_L"
+    "2001_L", "2004_L", "2005_L", "2007_L", "2010_L", "2014_L", "2017_L", "2019_L",
+    "QCT2000_R", "QCT2001_R",
 ]
 
 master_filename = os.path.join(data_dir, 'tacosound_master_all.csv')
@@ -150,7 +157,7 @@ for specimen_id, specimen in enumerate(target_folders):
                                          removeunconn=True,
                                          verbose=True)
     
-    data_3D_QCT_BW_peri = sitk.GetImageFromArray(data_3D_QCT_BW_peri.astype('uint8'))
+    data_3D_QCT_BW_peri = sitk.GetImageFromArray(binary_fill_holes(data_3D_QCT_BW_peri).astype('uint8'))
     data_3D_QCT_BW_peri.CopyInformation(data_3D_QCT_trans)
 
     hole_filling_filter = sitk.VotingBinaryIterativeHoleFillingImageFilter()
