@@ -29,8 +29,8 @@ target_folders = [
     # "1996_R",
     # "2005_L",
     # "2007_L",
-    "2019_L",
-    # "2000_R",
+    # "2019_L",
+    "2000_R",
     # "2001_R",
 ]
 
@@ -40,8 +40,8 @@ isqnames = [
     # "C0001808",
     # "C0001015",
     # "C0001429",
-    "C0001524",
-    # "C0002013",
+    # "C0001524",
+    "C0002013",
     # "C0001863",
 ]
 
@@ -195,5 +195,11 @@ for specimen_id, specimen in enumerate(target_folders):
         f"/home/giiori/myterminus/software/elastix5.1/bin/elastix -f {output_file_HR_res} -m {output_QCT_R_HR} -fMask {output_QCT_R_HR_mask} -out {elastix_output_dir} -p {elastix_parameter_file} "
         )
     
-    os.system(elastix_command)
     print(elastix_command)
+    status = os.system(elastix_command)
+    if status != 0:
+        raise RuntimeError(f"elastix failed (status {status}), see {elastix_output_dir}/elastix.log")
+
+    # Overwrite the moving image with the result of the registration
+    img = sitk.ReadImage(f"{elastix_output_dir}/result.0.mhd")
+    sitk.WriteImage(img, output_QCT_R_HR)   # overwrites the moving image

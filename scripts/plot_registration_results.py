@@ -59,7 +59,7 @@ target_folders = [
     # "2005_L", # OK
     # "2007_L", # OK
     # "2019_L",   # OK
-    "2000_R",   # OK
+    # "2000_R",   # OK
     "2001_R",   # OK
 ]
 
@@ -70,7 +70,7 @@ isqnames = [
     # "C0001015",
     # "C0001429",
     # "C0001524",
-    "C0002013",
+    # "C0002013",
     "C0001863",
 ]
 
@@ -116,9 +116,6 @@ for specimen_id, specimen in enumerate(target_folders):
     z_size = header['z_dim']
 
     cz1, cy1, cx1 = z_size // 2, y_size // 2, x_size // 2
-
-    if specimen == "2000_R":
-        z_size = 5105
 
     if specimen == "2001_R":
         z_size = 5105

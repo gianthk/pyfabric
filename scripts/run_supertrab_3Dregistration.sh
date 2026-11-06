@@ -18,4 +18,5 @@ export LD_LIBRARY_PATH=/home/giiori/myterminus/software/elastix5.1/lib:$LD_LIBRA
 # python /home/giiori/myterminus/code/pyfabric/scripts/supertrab_resample.py
 
 # python /home/giiori/myterminus/code/pyfabric/scripts/3Dregister_QCTdata.py
+# python /home/giiori/myterminus/code/pyfabric/scripts/3Dregister_QCTdata_overwrite_elastix.py
 python /home/giiori/myterminus/code/pyfabric/scripts/plot_registration_results.py

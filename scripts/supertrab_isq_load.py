@@ -36,7 +36,7 @@ target_folders = [
     #"2007_L",
     #"2019_L",
     "2000_R",
-    '2001_R',
+    # '2001_R',
 ]
 
 #loop over images
@@ -50,8 +50,8 @@ for subfolder in target_folders:
 
     #TODO change to all slices
     #Load image
-    image_data, ISQheader, filename = ISQload(file_path, x_min=0, y_min=0, z_min=0, x_size=4608, y_size=4608, z_size=5105)
-    # image_data, ISQheader, filename = ISQload(file_path)
+    # image_data, ISQheader, filename = ISQload(file_path, x_min=0, y_min=0, z_min=0, x_size=4608, y_size=4608, z_size=5105) # 5105 for stack 2001_R
+    image_data, ISQheader, filename = ISQload(file_path)
 
     #Process image
     image_data[:] = gaussian_filter(image_data, sigma=sigma)
