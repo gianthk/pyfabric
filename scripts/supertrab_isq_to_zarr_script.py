@@ -41,7 +41,10 @@ target_folders = [
     "1996_R",
     "2005_L",
     "2007_L",
-    "2019_L"
+    "2019_L",
+    "2000_R",
+    "2001_R",
+
 ]
 
 # Define chunk size
